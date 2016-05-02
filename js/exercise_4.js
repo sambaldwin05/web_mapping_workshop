@@ -52,8 +52,8 @@ var clickHandler = function(e){
     // Display some properties if we have them.
     if(feature.properties.cuisine) info += '<p>' + feature.properties.cuisine + '</p>';
     if(feature.properties.phone) info += '<p>' + feature.properties.phone + '</p>';
-    
-    if(feature.properties.website) info += '<p><a href="' + feature.properties.website + '">' + feature.properties.website + '</a></p>';
+    var website = feature.properties.website;
+    if(website) info += '<p><a href="' + website + '">' + website + '</a></p>';
     
     info += '</div>';
     $('#info').append(info);
