@@ -29,7 +29,7 @@ featureLayer.on('ready', function(){
         	"marker-color": "#8834bb",
           	"marker-size": "large",
           	"marker-symbol": "restaurant"
-        }));
-    );
+        }))
+    });
     map.fitBounds(featureLayer.getBounds());
 });
