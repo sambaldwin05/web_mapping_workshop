@@ -30,6 +30,6 @@ featureLayer.on('ready', function(){
           	"marker-size": "large",
           	"marker-symbol": "restaurant"
         }))
-    })
+    });
     map.fitBounds(featureLayer.getBounds());
 });
