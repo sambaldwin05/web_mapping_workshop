@@ -53,7 +53,7 @@ var clickHandler = function(e){
     if(feature.properties.cuisine) info += '<p>' + feature.properties.cuisine + '</p>';
     if(feature.properties.phone) info += '<p>' + feature.properties.phone + '</p>';
     var website = feature.properties.website;
-    if(website) info += '<p><a href="' + website + '">' + website + '</a></p>';
+    if(website) info += '<p><a target="_blank" href="' + website + '">' + website + '</a></p>';
     
     info += '</div>';
     $('#info').append(info);
