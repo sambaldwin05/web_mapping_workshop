@@ -20,23 +20,23 @@ var dataFileToAdd = 'data/restaurants.geojson';
 
 // Buildinate our feature.
 var featureLayer = L.mapbox.featureLayer();
-	featureLayer.loadURL(dataFileToAdd);
-	featureLayer.addTo(map);
+    featureLayer.loadURL(dataFileToAdd);
+    featureLayer.addTo(map);
 
 featureLayer.on('ready', function(){
-	this.eachLayer(function(layer){
-   		layer.setIcon(L.mapbox.marker.icon({
-        	"marker-color": "#8834bb",
-          	"marker-size": "large",
-          	"marker-symbol": "restaurant"
+    this.eachLayer(function(layer){
+        layer.setIcon(L.mapbox.marker.icon({
+            "marker-color": "#8834bb",
+            "marker-size": "large",
+            "marker-symbol": "restaurant"
         }))
     });
     map.fitBounds(featureLayer.getBounds());
 });
 
 //featureLayer.on('ready', function(){
-//	this.eachLayer(function(layer){
-//    	layer.bindPopup('Welcome to ' + layer.feature.properties.name);
+//  this.eachLayer(function(layer){
+//      layer.bindPopup('Welcome to ' + layer.feature.properties.name);
 //    });
 //});
 
@@ -46,7 +46,7 @@ var clickHandler = function(e){
   var feature = e.target.feature;
   
   $('#sidebar').fadeIn(400, function(){
-  	var info = '';
+    var info = '';
     info += '<div>';
     info += '<h2>' + feature.properties.name + '</h2>';
     // Display some properties if we have them.
@@ -61,12 +61,31 @@ var clickHandler = function(e){
 };
 
 featureLayer.on('ready', function(){
-	this.eachLayer(function(layer){
-    	layer.on('click', clickHandler);
+    this.eachLayer(function(layer){
+        layer.on('click', clickHandler);
+    })
+})
+map.on('click', function(){
+    $('#sidebar').fadeOut(200);
+})
+
+// Do location things.
+var myLocation = L.mapbox.featureLayer().addTo(map);
+
+map.on('locationfound', function(e){
+    myLocation.setGeoJSON({
+        type: 'Feature',
+        geometry: {
+            type: 'Point',
+            coordinates: [ e.latlng.lng, e.latlng.lat ]
+        },
+        properties: {
+            "title": "Here I am!",
+            "marker-color": "#ff8888",
+            "marker-symbol": "star"
+        }
     })
 })
 
-map.on('click', function(){
-	$('#sidebar').fadeOut(200);
-})
+map.locate({setView: true});
 
